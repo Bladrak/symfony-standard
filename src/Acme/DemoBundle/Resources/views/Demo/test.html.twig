@@ -1,0 +1,12 @@
+{% extends "AcmeDemoBundle::layout.html.twig" %}
+
+{% block title "Symfony - Test form" %}
+
+{% block content %}
+    <form action="{{ path('_demo_test') }}" method="POST" id="test_form">
+        {{ form_errors(form) }}
+
+        {{ form_rest(form) }}
+        <input type="submit" value="Send" class="symfony-button-grey" />
+    </form>
+{% endblock %}

@@ -2,6 +2,7 @@
 
 namespace Acme\DemoBundle\Controller;
 
+use Acme\DemoBundle\Model\OverriddenTestModel;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -29,6 +30,22 @@ class DemoController extends Controller
     public function helloAction($name)
     {
         return array('name' => $name);
+    }
+
+    /**
+     * @Route("/test", name="_demo_test")
+     * @Template()
+     */
+    public function testAction(Request $request)
+    {
+        $testObject = new OverriddenTestModel();
+
+        $form = $this->createFormBuilder($testObject)
+            ->add('testProperty')
+            ->getForm();
+        $form->handleRequest($request);
+
+        return array('form' => $form->createView());
     }
 
     /**
